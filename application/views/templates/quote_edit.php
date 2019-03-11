@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext" rel="stylesheet">
+   
+    <style>
+      
+        body{
+            font-family: 'Didact Gothic', sans-serif;
+    
+        }
+        #footer { 
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            border-top: 3px solid #000;
+            text-align: center;
+            color: #000;
+            font-size: 80%;
+            font-style: italic;
+        }
+        #company{
+            text-align: center;
+        }
+        #company img{
+            height: 150px;
+            width: 200px;
+        }
+        .details-box{
+           
+            padding: 10px;
+        }
+        .header{
+            background-color: #eee;
+            text-align: center;
+            padding: 10px;
+            font-size: 120%;
+        }
+        
+        #customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #ddd;
+    color: #111;
+}
+       
+    </style>
+</head>
+<body>
+    <div id="company">
+       <img src="http://e-procure.lfcww.org/assets/global/images/logo/new_logo.jpg" alt="LFC logo" >
+    </div>
+    <h5 class="header"> QUOTATION UPLOAD</h5>
+    <?php foreach($message as $lis):?>
+    <?php endforeach;?>
+    <p>RFP Number: RFQ000<?= $lis->rfq_ID; ?></p>
+    <p>Date of Issue: &nbsp; <?= $lis->entry_date; ?></p>
+    <p>Date of Submission: &nbsp; <?= $lis->deadline; ?></p>  
+    <p><strong>PURPOSE</strong></p>
+
+    <p>The Procurement Department is seeking quotation for interested candidates to provide various software licenses.</p>
+
+    <p><strong>BACKGROUND</strong></p>
+
+<p>Department of Procurement is department that’s required to procure services, materials, equipment and construction while ensuring that quality, safety, and cost-effectiveness are achieved for Living Faith Church Worldwide Faith Tabernacle Ota.</p>
+   <p><strong>REQUIREMENTS</strong></p>
+  
+    <div class="details-box">
+        <table id="customers">
+       
+           <tr>
+            <th>S/N</th>
+            <th>PRODUCT</th>
+            <th>SPECIFICATION</th>
+            <th>QTY</th>
+            <th>PRICE</th>
+
+            </tr>  
+             <?php  $num= 1;?>
+             <?php $x=0;?>
+               <?php foreach($message as $li):?>
+             <?php echo form_open('Quotes/upload_price');?>
+                
+                
+                 <input type="hidden" name="req_detail_ID[<?=$x;?>]" value="<?=$li->req_detail_ID;?>">
+                 <input type="hidden" name="rfq_ID" value="<?=$li->rfq_ID;?>">
+                 <input type="hidden" name="vendor_ID" value="<?=$li->vendor_ID;?>">
+                  <input type="hidden" name="product_name[<?=$x;?>]" value="<?=$li->name;?>">
+                   <input type="hidden" name="product_ID[<?=$x;?>]" value="<?=$li->product_id;?>">
+
+                        <tr>
+                          <td><?= $num; ?></td>
+                          <td><?= $li->name; ?></td>
+                          <td>
+                           <input type="text" name="product_specification[<?=$x;?>]" value="<?=$li->product_specification;?>">
+                         </td>
+
+                          <td> 
+                            <input type="text" name="quantity[<?=$x;?>]" value="<?=$li->quantity;?>">
+                          </td>
+                        
+                          <td>
+                                 <input type="text" name="unit_price[<?=$x;?>]" class="form-control" placeholder="#Quotation Price">                           
+                          </td>
+        
+                        </tr>
+                    <?php $num++;?>
+                    <?php $x++;?> 
+                <?php endforeach;?>
+           
+        </table><br>
+           
+           <input type="submit" name="submit" class="btn btn-primary">
+    </div>
+
+    <?php echo form_close();?>
+  
+    
+    <p><strong>SELECTION CRITERIA</strong></p>
+
+<p>Quotation must meet the following criteria:</p>
+<ol>
+    <li>The quotation should meet the specification required.</li>
+    <li> Reasonable pricing, quality not negotiable</li>
+    <li>Warranty must be given on all supply.</li>
+    <li>Submission within the defined time-window</li>
+    <li> You comply with procurement rules as applicable to state and federal law regulation.</li>
+</ol>
+
+<p><strong>RFQ PROCESS</strong></p>
+<p>The following is the process that Living Faith Church Worldwide procurement team will follow in reviewing and approving quotations, as well as preliminary information on the process that will take place once a quotation is selected.</p>
+<ol>
+    <li>A copy of this request for Items for quotation will be mailed.</li>
+    <li>Once received, completequotation should be sent to purchasingdpt@lfcww.org</li>
+    <li>In cases where similar quotations are received from different organizations, the one received first, based on the date and time stamp of the e-mail will receive preference, if all requirements have been met by both quotations.</li>
+    <li>If we accept aquotation, then you will be contacted and informed on the decision TO application.</li>
+    
+</ol>
+
+<p>NB: Final decision for all application decisions are at the sole discretion of the Procurement Department.<br>
+
+CONTACT INFORMATION Please send any questions to purchasingdpt@lfcww.org with your name, email address, and telephone number.</p>
+   
+    <div id="footer">
+         <p>Login here <a href="http://procure.lfcww.org/">Living Faith Admin. Portal Login</a></p>
+    </div>
+</body>
+
